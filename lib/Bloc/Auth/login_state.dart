@@ -9,6 +9,8 @@ final class UnAuth extends LoginState{}
 
 
 final class LoginSuccess extends LoginState{
+  final Map<String, dynamic> profileData;
+  LoginSuccess(this.profileData);
 }
 
 final class LoginFailure extends LoginState {

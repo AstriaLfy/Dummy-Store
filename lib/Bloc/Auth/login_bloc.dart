@@ -68,7 +68,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
           if (response.statusCode == 200) {
             final profile = jsonDecode(response.body);
-            emit(LoginSuccess());
+            emit(LoginSuccess(profile));
             print("Login Succeed");
             print(profile);
           } else emit(LoginFailure("error"));

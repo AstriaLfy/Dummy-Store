@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             );
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("error")),
+              const SnackBar(content: Text("Usn or Pw Error")),
             );
           }
         },
@@ -109,8 +109,10 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             if(usnController.text == "" && pwController.text == ""){
                               print("usn and pw is null");
+                            } else if(pwController.text.length < 8 ){
+                              print("Password >= 8");
                             }
-                            else {print("login success");
+                            else {print("login acc");
                             loginBloc.add(LoginSubmitted(usnController.text, pwController.text));
                               }
                           },
