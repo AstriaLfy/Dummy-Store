@@ -18,6 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   final pwController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final loginBloc = context.read<LoginBloc>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -86,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                     ElevatedButton(onPressed: (){
-                      context.read<LoginBloc>().add(LoginSubmitted(usnController.text, pwController.text));
+                      loginBloc.add(LoginSubmitted(usnController.text, pwController.text));
                     }, child: Text("Login"))
                   ],
                 ),

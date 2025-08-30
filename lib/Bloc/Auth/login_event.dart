@@ -9,3 +9,5 @@ class LoginSubmitted extends LoginEvent{
 
   LoginSubmitted(this.gmail, this.password);
 }
+
+class LoadProfile extends LoginEvent{}
