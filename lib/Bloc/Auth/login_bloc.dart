@@ -36,15 +36,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
           print("Debug Load Profile");
           add(LoadProfile());
-
-
         }
+
         else{
           print("password or username wrong");
+          emit(LoginFailure("error"));
         }
 
       }catch(e){
         print("Error $e");
+        emit(LoginFailure("error"));
       }
     });
 
