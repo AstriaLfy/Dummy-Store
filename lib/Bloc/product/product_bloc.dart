@@ -18,8 +18,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
         if(response.statusCode == 200){
           print("Fect Succeed");
-          final product = productFromJson(response.body);
-          emit(ProductFetchSucceed());
+          final item = productFromJson(response.body);
+          emit(ProductFetchSucceed(item));
+        } else {
+          print("Fetch Failed");
         }
 
       }catch(e){
@@ -30,10 +32,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
 
 
-    on<ProductEvent>((event, emit) {
-    });
+   // on<ProductEvent>((event, emit) {
+   // });
 
-    on<ProductEvent>((event, emit) {
-    });
+    //on<ProductEvent>((event, emit) {
+    //});
   }
 }
