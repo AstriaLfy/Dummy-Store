@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raion_battlepass_dummy/Bloc/Auth/login_bloc.dart';
+import 'package:raion_battlepass_dummy/UI/Pages/Home_Page.dart';
+import 'package:raion_battlepass_dummy/UI/Pages/Login_Page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -19,7 +21,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state is LoginLoading) {
@@ -29,18 +30,32 @@ class _ProfilePageState extends State<ProfilePage> {
             final profileData = state.profileData;
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Nama: ${profileData['name']}', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  Text('Email: ${profileData['email']}', style: const TextStyle(fontSize: 18)),
-                  const SizedBox(height: 8),
-                  Text('Role: ${profileData['role']}', style: const TextStyle(fontSize: 18)),
-                  const SizedBox(height: 16),
-                  if (profileData['avatar'] != null)
-                    Image.network(profileData['avatar']),
-                ],
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Is it you?"),
+                    SizedBox(height: 100,),
+                    CircleAvatar(
+                      radius: 70,
+                      backgroundColor: Colors.grey,
+                      child: Image.network(profileData.avatar, width: 100, height: 100,),
+                    ),
+                    Text(profileData.name),
+                    Text(profileData.email),
+                    Text(profileData.password),
+                    Text(profileData.role),
+
+                    SizedBox(height: 100,),
+
+                    ElevatedButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);},
+                        child: Text("Yes it's me")),
+
+                    ElevatedButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);},
+                        child: Text("No its not me")),
+
+                  ],
+                ),
               ),
             );
           }

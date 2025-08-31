@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:raion_battlepass_dummy/Bloc/Auth/AuthRepository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:raion_battlepass_dummy/models/users.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -67,14 +68,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           );
 
           if (response.statusCode == 200) {
-            final profile = jsonDecode(response.body);
+            //final profile = jsonDecode(response.body);
+            final profile = productFromJson(response.body);
             emit(LoginSuccess(profile));
             print("Login Succeed");
             print(profile);
           } else emit(LoginFailure("error"));
         }
         catch(e){
-          print("TOKEN ERROR");
+          print("TOKEN ERROR $e");
         }
     });
 
