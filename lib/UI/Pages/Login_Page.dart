@@ -16,6 +16,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final usnController = TextEditingController();
   final pwController = TextEditingController();
+  String? usnError;
+  String? pwError;
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +84,11 @@ class _LoginPageState extends State<LoginPage> {
                         TextField(
                           controller: usnController,
                           keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
                             labelText: "Username",
+                            errorText: usnError,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
@@ -95,11 +98,12 @@ class _LoginPageState extends State<LoginPage> {
                         TextField(
                           controller: pwController,
                           keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
                             labelText: "Password",
-                            border: OutlineInputBorder(
+                            errorText: pwError,
+                            border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                           ),
@@ -107,14 +111,24 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 50),
                         ElevatedButton(
                           onPressed: () {
-                            if(usnController.text == "" && pwController.text == ""){
-                              print("usn and pw is null");
-                            } else if(pwController.text.length < 8 ){
-                              print("Password >= 8");
-                            }
-                            else {print("login acc");
-                            loginBloc.add(LoginSubmitted(usnController.text, pwController.text));
+                            setState(() {
+                              if(usnController.text.isEmpty && pwController.text.isEmpty){
+                                print("usn and pw is null");
+                                usnError = "Usn is null";
+                                pwError = "Pw is null";
+                              } else if (usnController.text.isEmpty){
+                                usnError = "usn is null";
+                              } else if(pwController.text.isEmpty){
+                                pwError = "pw is null";
                               }
+                              else if(pwController.text.length < 8 ){
+                                print("Password >= 8");
+                                pwError = "Pw >= 8";
+                              }
+                              else {print("login acc");
+                              loginBloc.add(LoginSubmitted(usnController.text, pwController.text));
+                              }
+                            });
                           },
                           child: const Text("Login"),
                         ),

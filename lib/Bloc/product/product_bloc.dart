@@ -8,6 +8,7 @@ part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc() : super(ProductInitial()) {
+
     on<ProductFetch>((event, emit) async {
       emit(ProductLoading());
 
@@ -23,17 +24,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         } else {
           print("Fetch Failed");
         }
-
       }catch(e){
         print("error $e");
       }
-
     });
 
 
 
-   // on<ProductEvent>((event, emit) {
-   // });
+    on<ProductDetail>((event, emit) async {
+      emit(ProductLoading());
+
+      try{
+        final id = event.id;
+          final url = Uri.parse("https://api.escuelajs.co/api/v1/products/$id");
+          final response = await http.get(url);
+          if(response.statusCode == 200){
+            final detail = productFromJson(response.body);
+            emit(ProductDetailLoaded(detail));
+            print(detail);
+          }
+      } catch(e){
+        print(e);
+      }
+
+    });
 
     //on<ProductEvent>((event, emit) {
     //});

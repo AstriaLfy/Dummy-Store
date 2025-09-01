@@ -5,9 +5,9 @@ sealed class ProductEvent {}
 
 class ProductFetch extends ProductEvent{}
 
-class ProductClick extends ProductEvent{
+class ProductDetail extends ProductEvent{
   final String id;
-  ProductClick(this.id);
+  ProductDetail(this.id);
 }
 
 class ProductUpdate extends ProductEvent{}
