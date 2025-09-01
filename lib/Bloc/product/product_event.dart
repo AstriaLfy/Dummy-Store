@@ -4,9 +4,10 @@ part of 'product_bloc.dart';
 sealed class ProductEvent {}
 
 class ProductFetch extends ProductEvent{}
+class SingleFetch extends ProductEvent{}
 
 class ProductDetail extends ProductEvent{
-  final String id;
+  final int id;
   ProductDetail(this.id);
 }
 

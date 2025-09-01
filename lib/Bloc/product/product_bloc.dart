@@ -39,7 +39,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           final url = Uri.parse("https://api.escuelajs.co/api/v1/products/$id");
           final response = await http.get(url);
           if(response.statusCode == 200){
-            final detail = productFromJson(response.body);
+            final detail = singleProductFromJson(response.body);
             emit(ProductDetailLoaded(detail));
             print(detail);
           }
@@ -48,6 +48,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       }
 
     });
+
 
     //on<ProductEvent>((event, emit) {
     //});

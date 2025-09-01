@@ -9,6 +9,10 @@ List<Product> productFromJson(String str) => List<Product>.from(json.decode(str)
 
 String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+Product singleProductFromJson(String str) =>
+    Product.fromJson(json.decode(str));
+
+
 class Product {
   final int id;
   final String title;

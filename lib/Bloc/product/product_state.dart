@@ -13,6 +13,6 @@ final class ProductFetchSucceed extends ProductState{
 }
 
 final class ProductDetailLoaded extends ProductState{
-  final List<Product> product;
+  final Product product;
   ProductDetailLoaded(this.product);
 }
