@@ -48,10 +48,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
                     SizedBox(height: 100,),
 
-                    ElevatedButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);},
+                    ElevatedButton(onPressed: (){ Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()),);},
                         child: Text("Yes it's me")),
 
-                    ElevatedButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);},
+                    ElevatedButton(onPressed: (){ Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()),);},
                         child: Text("No its not me")),
 
                   ],

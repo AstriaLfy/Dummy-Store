@@ -30,7 +30,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     });
 
 
-
     on<ProductDetail>((event, emit) async {
       emit(ProductLoading());
 
@@ -50,7 +49,23 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     });
 
 
+    on<ProductAdd>((event, emit) async {
+      emit(ProductLoading());
+
+      try{
+        //postAPI
+
+
+
+      }catch(e){
+        print(e);
+      }
+    });
+
+
     //on<ProductEvent>((event, emit) {
     //});
+
+
   }
 }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raion_battlepass_dummy/Bloc/product/product_bloc.dart';
 import 'package:raion_battlepass_dummy/models/product.dart';
+import 'package:raion_battlepass_dummy/UI/Pages/Home_Page.dart';
 
 class DetailPage extends StatefulWidget {
   final int id;
-  const DetailPage({super.key, required this.id});
+  final String title;
+  const DetailPage({super.key, required this.id, required this.title});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -18,9 +20,22 @@ class _DetailPageState extends State<DetailPage> {
     context.read<ProductBloc>().add(ProductDetail(widget.id));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const HomePage()),
+            );
+          },
+        ),
+        title: Text(widget.title),
+      ),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state is ProductLoading) {
@@ -59,6 +74,8 @@ class _DetailPageState extends State<DetailPage> {
           return Center(
             child: Text(widget.id.toString()),
           );
+
+
         },
       ),
     );

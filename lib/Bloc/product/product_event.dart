@@ -14,4 +14,4 @@ class ProductDetail extends ProductEvent{
 class ProductUpdate extends ProductEvent{}
 class ProductAdd extends ProductEvent{}
 class ProductDelete extends ProductEvent{}
-
+class StateReset extends ProductEvent{}
